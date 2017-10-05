@@ -6,7 +6,7 @@ mountpoints_list = list()
 free_space = 0
 
 
-def get_partition_list():
+def get_partition_list():                           #function gets list of all files about HDD
     partitions = open("/proc/partitions")
     string_list = partitions.readlines()
     for string in string_list:
@@ -16,7 +16,7 @@ def get_partition_list():
     partitions.close()
 
 
-def get_mountpoints():
+def get_mountpoints():                              #function gets all characters for memory
     mtab = open("/etc/mtab")
     string_list = mtab.readlines()
     for string in string_list:
@@ -27,7 +27,7 @@ def get_mountpoints():
     mtab.close()
 
 
-def get_free_space():
+def get_free_space():                               #function calculates free space
     global free_space
     get_partition_list()
     get_mountpoints()
@@ -37,7 +37,7 @@ def get_free_space():
         free_space += free / (1024*1024*1024)
 
 
-def get_hd_info():
+def get_hd_info():                                  #main function
     get_free_space()
     os.system("./main > temp")
     info = open("temp")
